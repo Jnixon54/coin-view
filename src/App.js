@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import GlobalDataDisplay from './components/GlobalDataDisplay/GlobalDataDisplay';
 import ListCreator from './components/ListDisplay/ListCreator';
+import Chart from './components/StockChart/Chart';
 
 import * as coinMarketCap from './api_calls/coin-market-cap';
 import * as cryptoCompare from './api_calls/crypto-compare';
@@ -22,7 +23,8 @@ class App extends Component {
       topCoinsSym: [],
       topCoinsHist: [],
       isFocused: false,
-      focus: ''
+      focusData: [],
+      timeframe: 'day'
 
 
     }
@@ -62,24 +64,39 @@ class App extends Component {
     
   }
 
-  handleFocus(coin){
+  handleFocus(coinHist){
     if (this.state.isFocused){
-      this.setState({isFocused: false, focus: coin});  
+      this.setState({isFocused: false, focusData: coinHist});  
     } else {
-      this.setState({isFocused: true, focus: coin});
+      this.setState({isFocused: true, focusData: coinHist});
     }
-    console.log(coin);
+    console.log(coinHist);
     // console.log(this.state.isFocused.toString() + this.state.focus.toString());
+  }
+  handleTimeframe(timeframe){
+    this.setState({timeframe});
   }
 
   render() {
+    let tags = ["test"];
+    !this.state.isFocused && tags.push("hidden");
 
     return (
       <div className="App">
         <GlobalDataDisplay data={this.state.globalData} />
+        <div className="button-nav">
+          <button className="button" onClick={() => this.handleTimeframe('day')}>24 HR</button>
+          <button className="button" onClick={() => this.handleTimeframe('week')}>7 Day</button>
+          <button className="button" onClick={() => this.handleTimeframe('month')}>1 Month</button>
+        </div>
         <ListCreator topCoins={this.state.topCoins}
                      isFocused={this.state.isFocused}
-                     handleFocus={this.handleFocus}/>
+                     handleFocus={this.handleFocus}
+                     timeframe={this.state.timeframe}/>
+        <Chart handleFocus={this.handleFocus}
+               isFocused={this.state.isFocused}
+               focusData={this.state.focusData}
+               tags={tags}/>
       </div>
     );
   }

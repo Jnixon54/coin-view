@@ -21,15 +21,17 @@ body {
 }
 .test {
   position: absolute;
-  top: 0vh;
-  right: -95%;
+  top: 6vh;
+  right: 5%;
   opacity: 1;
   display: inline-block;
-  background-color: white;
+  background-color: transparent;
   width: 90%;
   height: 50vh;
   transition-delay: 800ms;
   transition-duration: 1000ms;
+  
+  
 }
 
 .test.hidden{
@@ -37,6 +39,7 @@ body {
   opacity: 0;
   visibility: hidden;
   transition-delay: 0ms;
+  z-index: 0;
   
 }
 
@@ -45,6 +48,25 @@ body {
 .table-container {
   margin: 0 auto;
   width: 70%;
+}
+
+.button-nav {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.button{
+  width: 80px;
+  height: 40px;
+  background-color: transparent;
+  color: white;
+  border: 0px solid #60887b;
+}
+
+.button:hover {
+  background-color: #60887b;
 }
 
 .tile-container {

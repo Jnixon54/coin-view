@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import * as cryptoCompare from '../../api_calls/crypto-compare';
-import Chart from '../StockChart/Chart';
 import { Sparklines, SparklinesLine, SparklinesReferenceLine, SparklinesSpots } from 'react-sparklines';
 import './ListDisplay.css'
 
@@ -23,8 +22,25 @@ export default class ListDisplay extends Component {
   // }
 
   componentDidMount(){
-    this.retrieveHistoricPrice(this.props.coin.symbol, 'USD', 'hour', 24);
-    
+    if (this.props.timeframe === 'day'){
+      this.retrieveHistoricPrice(this.props.coin.symbol, 'USD', 'hour', 24);
+    } else if (this.props.timeframe === 'week'){
+      this.retrieveHistoricPrice(this.props.coin.symbol, 'USD', 'hour', 168);
+    } else if (this.props.timeframe === 'month'){
+      this.retrieveHistoricPrice(this.props.coin.symbol, 'USD', 'day', 30);
+    }
+
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps.timeframe)
+    if (nextProps.timeframe === 'day'){
+      this.retrieveHistoricPrice(nextProps.coin.symbol, 'USD', 'hour', 24);
+    } else if (nextProps.timeframe === 'week'){
+      this.retrieveHistoricPrice(nextProps.coin.symbol, 'USD', 'hour', 168);
+    } else if (nextProps.timeframe === 'month'){
+      this.retrieveHistoricPrice(nextProps.coin.symbol, 'USD', 'day', 30);
+    }
   }
 
   retrieveHistoricPrice(fsym, tsym, period, limit){
@@ -38,7 +54,7 @@ export default class ListDisplay extends Component {
     return(
       <div >
         {priceArray.length > 0 ? 
-        <div className="list-row Grid" onClick={() => this.props.handleFocus(this.props.coin.symbol)}>
+        <div className="list-row Grid" onClick={() => this.props.handleFocus(this.state.coinHist)}>
           <div className="Grid-cell col1">{this.props.coin.rank}</div>
           <div className="Grid-cell">{this.props.coin.symbol}</div>
           <div className="Grid-cell">{this.props.coin.name}</div>
@@ -62,8 +78,7 @@ export default class ListDisplay extends Component {
               }
             </Sparklines> */}
           </div>
-          <Chart handleFocus={this.props.handleFocus}
-                 isFocused={this.props.isFocused}/>
+
         </div>
         :
         <div className="no-data">No Data.</div>

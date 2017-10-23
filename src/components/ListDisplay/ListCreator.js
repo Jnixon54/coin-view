@@ -18,7 +18,7 @@ export default class ListCreator extends Component {
 
     return(
       <div className={tags.join(' ')}>  
-        <div className="list-header list-row Grid"> 
+        <div className="list-header list-row Grid" id="table-header"> 
           <div className="Grid-cell col1" id="rank">Rank</div>
           <div className="Grid-cell">Symbol</div>
           <div className="Grid-cell">Name</div>
@@ -32,7 +32,8 @@ export default class ListCreator extends Component {
           this.props.topCoins.map( (item) => { 
             return <ListDisplay coin={item} 
                                 isFocused={this.props.isFocused} 
-                                handleFocus={this.props.handleFocus}/>;
+                                handleFocus={this.props.handleFocus}
+                                timeframe={this.props.timeframe}/>;
           }):
           <p className="list-row">No items found.</p>
           }

@@ -16,6 +16,15 @@
   padding-left: 0px;
 }
 
+#table-header {
+  cursor: default;
+
+}
+#table-header:hover {
+  background-color: #303030;
+
+}
+
 /* .ng-animate.jm-sweep-right {
   transition: all 500ms;
 }

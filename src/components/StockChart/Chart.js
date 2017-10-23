@@ -17,9 +17,15 @@ export default class Chart extends Component {
     
     return(
       <div>
-        <div className={tags.join(' ')}>sadasdasd
-            <button className="return" onClick={() => this.props.handleFocus(null)}>Switch</button>
+        <div className={this.props.tags.join(' ')}>
+            <button className="return" onClick={() => this.props.handleFocus([])}>{"<<"}</button>
+          <div className="big-chart">
+          <Sparklines data={this.props.focusData.map(item => item.close)} height={125} margin={0}>
+            <SparklinesLine color="#60887b" />
+          </Sparklines>
+          </div>
         </div>
+        
       </div>
     )
   }

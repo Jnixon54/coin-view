@@ -1,14 +1,25 @@
 .return {
   position: absolute;
+  font-size: 18px;
+  color: white;
   left: 0;
   top: 0;
-  width: 75px;
-  height: 50px;
-  background-color: #303030;
-  border: 1px solid #60887b;
+  width: 80px;
+  height: 40px;
+  background-color: #60887b;
+  border: 0px solid #303030;
+  
 }
 
 .return:hover {
-  background-color: #60887b;
+  /* background-color: #303030; */
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.big-chart {
+  /* background-color: white; */
+  width: 100%;
+  height: 100%;
 }
 
