@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './GlobalDataDisplay.css';
 
 export default class GlobalDataDisplay extends Component {
   constructor(props){
@@ -25,18 +26,15 @@ export default class GlobalDataDisplay extends Component {
     // console.log(this.state.bitcoin_pct);
     return(
     <div className="header">
-      <div className="header-logo">
-        <img src=".bitcoin-symbol.png"></img>
-      </div>
       <div className="header-stats">
         <div className="header-item">
-          <a>Total Market Cap: ${parseInt(this.state.total_market_cap_usd, 10).toLocaleString()}</a>
+          <h1>Total Market Cap: ${parseInt(this.state.total_market_cap_usd, 10).toLocaleString()}</h1>
         </div>
         <div className="header-item">
-          <a>Total Daily Volume: ${parseInt(this.state.total_24h_volume_usd, 10).toLocaleString()}</a>
+          <h1>Total Daily Volume: ${parseInt(this.state.total_24h_volume_usd, 10).toLocaleString()}</h1>
         </div>
         <div className="header-item">
-          <a>Bitcoin Market Share: {this.state.bitcoin_pct}%</a>
+          <h1>Bitcoin Market Share: {this.state.bitcoin_pct}%</h1>
         </div>
       </div>
     </div>

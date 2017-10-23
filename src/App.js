@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import GlobalDataDisplay from './components/GlobalDataDisplay/GlobalDataDisplay';
 import TileDisplay from './components/TileDisplay/TileDisplay';
-import ListDisplay from './components/ListDisplay/ListDisplay';
+import ListCreator from './components/ListDisplay/ListCreator';
 
 import * as coinMarketCap from './api_calls/coin-market-cap';
 import * as cryptoCompare from './api_calls/crypto-compare';
@@ -20,11 +20,13 @@ class App extends Component {
       // coinListArray: [],
       // coinPriceList: [],
       topCoins: [],
-      topCoinsSym: []
+      topCoinsSym: [],
+      isFocused: false,
+      focus: ''
 
 
     }
-
+    this.handleFocus = this.handleFocus.bind(this);
     // this.retrieveGlobalData = this.retrieveGlobalData.bind(this);
     // this.retrieveHistoricPrice = this.retrieveHistoricPrice.bind(this);
     
@@ -60,29 +62,18 @@ class App extends Component {
     
   }
 
+  handleFocus(coin){
+    this.setState({isFocused: true, focus: coin});
+    console.log(coin);
+  }
+
   render() {
     return (
       <div className="App">
         <GlobalDataDisplay data={this.state.globalData} />
-        <div className="table-container">
-          <table>
-            <th>Rank</th>
-            <th>Symbol</th>
-            <th>Name</th>
-            <th>Price USD</th>
-            <th>Price BTC</th>
-            <th>Market Cap</th>
-            <th>% Change 24HR</th>
-            <th>Chart</th>
-          {
-            this.state.topCoins.length > 0 ?
-            this.state.topCoins.map( (item) => { 
-              return <ListDisplay coin={item} />;
-            }):
-            <p>No items found.</p>
-          }
-          </table>
-        </div>
+        <ListCreator topCoins={this.state.topCoins}
+                     isFocused={this.state.isFocused}
+                     handleFocus={this.handleFocus}/>
       </div>
     );
   }

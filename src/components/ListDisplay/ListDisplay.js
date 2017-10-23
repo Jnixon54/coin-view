@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as cryptoCompare from '../../api_calls/crypto-compare';
 import { Sparklines, SparklinesLine, SparklinesReferenceLine, SparklinesSpots } from 'react-sparklines';
+import './ListDisplay.css'
 
 
 export default class TileDisplay extends Component {
@@ -33,34 +34,38 @@ export default class TileDisplay extends Component {
     const priceArray = this.state.coinHist.map(item => item.close);
     const priceChange = ((priceArray[priceArray.length - 1]/priceArray[0]) - 1) * 100
     
-
     return(
-     
-        <tr>
-          <td>#{this.props.coin.rank}</td>
-          <td>{this.props.coin.symbol}</td>
-          <td>{this.props.coin.name}</td>
-          <td>{this.props.coin.price_usd}</td>
-          <td>{this.props.coin.price_btc}</td>
-          <td>{this.props.coin.market_cap_usd}</td>
-          <td>{priceChange.toFixed(2)}</td>
-          <td className="chart-container">   
-            {priceArray.length > 0 ? 
-            <div className="chart">
-              <Sparklines data={this.state.coinHist.map(item => item.close)} style={{background: "transparent"}} margin={0} height={50}>
-                {priceChange > 0 ?
-                <SparklinesLine style={{ stroke: "white", fill: "#00ff00", fillOpacity: '.4' }} />
-                :
-                <SparklinesLine style={{ stroke: "white", fill: "ff0000", fillOpacity: '.4' }} />
-                }
-                {/* <SparklinesSpots /> */}
-              </Sparklines>
-            </div>
-            :
-            <div className="no-data">No Data.</div>
+      <div >
+        {priceArray.length > 0 ? 
+        <div className="list-row Grid" onClick={() => this.props.swipeLeft(this.props.coin.symbol)}>
+          <div className="Grid-cell col1">{this.props.coin.rank}</div>
+          <div className="Grid-cell">{this.props.coin.symbol}</div>
+          <div className="Grid-cell">{this.props.coin.name}</div>
+          <div className="Grid-cell">${this.props.coin.price_usd}</div>
+          <div className="Grid-cell">{this.props.coin.price_btc}</div>
+          <div className="Grid-cell">{priceChange.toFixed(2)}%</div>
+          <div className="chart Grid-cell colChart">
+            {priceChange > 0 ?
+            <Sparklines data={this.state.coinHist.map(item => item.close)} height={80}>
+              <SparklinesLine style={{ stroke: "#8ed53f", strokeWidth: "2", fill: "none" }} />
+            </Sparklines>:
+            <Sparklines data={this.state.coinHist.map(item => item.close)} height={80}>
+              <SparklinesLine style={{ stroke: "#d1192e", strokeWidth: "2", fill: "none" }} />
+            </Sparklines>
             }
-          </td>
-        </tr>
+            {/* <Sparklines data={this.state.coinHist.map(item => item.close)} style={{background: "transparent"}} margin={0} height={80}>
+              {priceChange > 0 ?
+              <SparklinesLine style={{ stroke: "white", fill: "#00ff00", fillOpacity: '.4' }} />
+              :
+              <SparklinesLine style={{ stroke: "white", fill: "ff0000", fillOpacity: '.4' }} />
+              }
+            </Sparklines> */}
+          </div>
+        </div>
+        :
+        <div className="no-data">No Data.</div>
+        }
+      </div>
 
     )
   }
