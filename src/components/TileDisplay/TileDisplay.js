@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as cryptoCompare from '../api_calls/crypto-compare';
+import * as cryptoCompare from '../../api_calls/crypto-compare';
 import { Sparklines, SparklinesLine, SparklinesReferenceLine, SparklinesSpots } from 'react-sparklines';
 
 

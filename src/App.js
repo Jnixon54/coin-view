@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import GlobalDataDisplay from './components/GlobalDataDisplay';
-import TileDisplay from './components/TileDisplay';
+import GlobalDataDisplay from './components/GlobalDataDisplay/GlobalDataDisplay';
+import TileDisplay from './components/TileDisplay/TileDisplay';
+import ListDisplay from './components/ListDisplay/ListDisplay';
 
 import * as coinMarketCap from './api_calls/coin-market-cap';
 import * as cryptoCompare from './api_calls/crypto-compare';
@@ -36,7 +37,7 @@ class App extends Component {
   componentDidMount(){
     this.retrieveGlobalData();
     // this.retrieveCoinList();
-    this.retrieveTopCoins(12);
+    this.retrieveTopCoins(6);
     // this.retrieveMultiFull();
     
   }
@@ -63,14 +64,24 @@ class App extends Component {
     return (
       <div className="App">
         <GlobalDataDisplay data={this.state.globalData} />
-        <div className="tile-container">
+        <div className="table-container">
+          <table>
+            <th>Rank</th>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Price USD</th>
+            <th>Price BTC</th>
+            <th>Market Cap</th>
+            <th>% Change 24HR</th>
+            <th>Chart</th>
           {
             this.state.topCoins.length > 0 ?
             this.state.topCoins.map( (item) => { 
-              return <TileDisplay coin={item} />;
+              return <ListDisplay coin={item} />;
             }):
             <p>No items found.</p>
           }
+          </table>
         </div>
       </div>
     );
