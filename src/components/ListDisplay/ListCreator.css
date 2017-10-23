@@ -1,11 +1,11 @@
-.list-main {
+/* .list-main {
   transition: all 1000ms ease;
   transform: translateX(0%);
 }
 
 .list-main.hidden {
   transform: translateX(-100%)
-}
+} */
 
 .list-header {
   font-weight: bolder;

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import * as cryptoCompare from '../../api_calls/crypto-compare';
+import Chart from '../StockChart/Chart';
 import { Sparklines, SparklinesLine, SparklinesReferenceLine, SparklinesSpots } from 'react-sparklines';
 import './ListDisplay.css'
 
 
-export default class TileDisplay extends Component {
+export default class ListDisplay extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -33,11 +34,11 @@ export default class TileDisplay extends Component {
   render(){
     const priceArray = this.state.coinHist.map(item => item.close);
     const priceChange = ((priceArray[priceArray.length - 1]/priceArray[0]) - 1) * 100
-    
+
     return(
       <div >
         {priceArray.length > 0 ? 
-        <div className="list-row Grid" onClick={() => this.props.swipeLeft(this.props.coin.symbol)}>
+        <div className="list-row Grid" onClick={() => this.props.handleFocus(this.props.coin.symbol)}>
           <div className="Grid-cell col1">{this.props.coin.rank}</div>
           <div className="Grid-cell">{this.props.coin.symbol}</div>
           <div className="Grid-cell">{this.props.coin.name}</div>
@@ -61,6 +62,8 @@ export default class TileDisplay extends Component {
               }
             </Sparklines> */}
           </div>
+          <Chart handleFocus={this.props.handleFocus}
+                 isFocused={this.props.isFocused}/>
         </div>
         :
         <div className="no-data">No Data.</div>

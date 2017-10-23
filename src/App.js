@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import GlobalDataDisplay from './components/GlobalDataDisplay/GlobalDataDisplay';
-import TileDisplay from './components/TileDisplay/TileDisplay';
 import ListCreator from './components/ListDisplay/ListCreator';
 
 import * as coinMarketCap from './api_calls/coin-market-cap';
@@ -40,7 +39,7 @@ class App extends Component {
   componentDidMount(){
     this.retrieveGlobalData();
     // this.retrieveCoinList();
-    this.retrieveTopCoins(3);
+    this.retrieveTopCoins(4);
     // this.retrieveMultiFull();
     
   }
@@ -74,18 +73,13 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <div className="App">
         <GlobalDataDisplay data={this.state.globalData} />
-        {this.state.isFocused === false ? 
         <ListCreator topCoins={this.state.topCoins}
                      isFocused={this.state.isFocused}
                      handleFocus={this.handleFocus}/>
-        :
-        <div id="test">sadasdasd
-        <button onClick={() => this.handleFocus(null)}>Switch</button>
-        </div>
-        }
       </div>
     );
   }

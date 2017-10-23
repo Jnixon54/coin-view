@@ -32,7 +32,7 @@ export default class ListCreator extends Component {
           this.props.topCoins.map( (item) => { 
             return <ListDisplay coin={item} 
                                 isFocused={this.props.isFocused} 
-                                swipeLeft={this.props.handleFocus}/>;
+                                handleFocus={this.props.handleFocus}/>;
           }):
           <p className="list-row">No items found.</p>
           }
