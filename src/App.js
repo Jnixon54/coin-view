@@ -21,6 +21,7 @@ class App extends Component {
       // coinPriceList: [],
       topCoins: [],
       topCoinsSym: [],
+      topCoinsHist: [],
       isFocused: false,
       focus: ''
 
@@ -39,7 +40,7 @@ class App extends Component {
   componentDidMount(){
     this.retrieveGlobalData();
     // this.retrieveCoinList();
-    this.retrieveTopCoins(6);
+    this.retrieveTopCoins(3);
     // this.retrieveMultiFull();
     
   }
@@ -63,17 +64,28 @@ class App extends Component {
   }
 
   handleFocus(coin){
-    this.setState({isFocused: true, focus: coin});
+    if (this.state.isFocused){
+      this.setState({isFocused: false, focus: coin});  
+    } else {
+      this.setState({isFocused: true, focus: coin});
+    }
     console.log(coin);
+    // console.log(this.state.isFocused.toString() + this.state.focus.toString());
   }
 
   render() {
     return (
       <div className="App">
         <GlobalDataDisplay data={this.state.globalData} />
+        {this.state.isFocused === false ? 
         <ListCreator topCoins={this.state.topCoins}
                      isFocused={this.state.isFocused}
                      handleFocus={this.handleFocus}/>
+        :
+        <div id="test">sadasdasd
+        <button onClick={() => this.handleFocus(null)}>Switch</button>
+        </div>
+        }
       </div>
     );
   }

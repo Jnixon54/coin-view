@@ -8,9 +8,11 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "react": "^16.0.0",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14",
-    "react-sparklines": "^1.7.0"
+    "react-sparklines": "^1.7.0",
+    "react-transition-group": "^2.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
