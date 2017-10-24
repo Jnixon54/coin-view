@@ -33,13 +33,13 @@ export default class ListDisplay extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps.timeframe)
+    console.log(nextProps.tsym)
     if (nextProps.timeframe === 'day'){
-      this.retrieveHistoricPrice(nextProps.coin.symbol, 'USD', 'hour', 24);
+      this.retrieveHistoricPrice(nextProps.coin.symbol, nextProps.tsym, 'hour', 24);
     } else if (nextProps.timeframe === 'week'){
-      this.retrieveHistoricPrice(nextProps.coin.symbol, 'USD', 'hour', 168);
+      this.retrieveHistoricPrice(nextProps.coin.symbol, nextProps.tsym, 'hour', 168);
     } else if (nextProps.timeframe === 'month'){
-      this.retrieveHistoricPrice(nextProps.coin.symbol, 'USD', 'day', 30);
+      this.retrieveHistoricPrice(nextProps.coin.symbol, nextProps.tsym, 'day', 30);
     }
   }
 
@@ -48,8 +48,8 @@ export default class ListDisplay extends Component {
   }
 
   render(){
-    const priceArray = this.state.coinHist.map(item => item.close);
-    const priceChange = ((priceArray[priceArray.length - 1]/priceArray[0]) - 1) * 100
+    let priceArray = this.state.coinHist.map(item => item.close);
+    let priceChange = ((priceArray[priceArray.length - 1]/priceArray[0]) - 1) * 100
 
     return(
       <div >

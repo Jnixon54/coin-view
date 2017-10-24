@@ -21,7 +21,7 @@ body {
 }
 .test {
   position: absolute;
-  top: 6vh;
+  top: calc(6vh + 50px);
   right: 5%;
   opacity: 1;
   display: inline-block;
@@ -38,8 +38,8 @@ body {
   /* display: none; */
   opacity: 0;
   visibility: hidden;
-  transition-delay: 0ms;
-  z-index: 0;
+  transition-duration: 1000ms;
+
   
 }
 
@@ -58,6 +58,7 @@ body {
 }
 
 .button{
+  font-size: 14px;
   width: 80px;
   height: 40px;
   background-color: transparent;
@@ -68,6 +69,12 @@ body {
 .button:hover {
   background-color: #60887b;
 }
+
+/* .return.hidden-button {
+  opacity: 0;
+  visibility: hidden;
+  transition-delay: 0ms;
+} */
 
 .tile-container {
   color: white;

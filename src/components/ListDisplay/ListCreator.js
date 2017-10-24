@@ -15,7 +15,7 @@ export default class ListCreator extends Component {
   render(){
     let tags = ["list-main"];
     this.props.isFocused && tags.push("hidden");
-
+console.log(this.props.tsym);
     return(
       <div className={tags.join(' ')}>  
         <div className="list-header list-row Grid" id="table-header"> 
@@ -33,7 +33,8 @@ export default class ListCreator extends Component {
             return <ListDisplay coin={item} 
                                 isFocused={this.props.isFocused} 
                                 handleFocus={this.props.handleFocus}
-                                timeframe={this.props.timeframe}/>;
+                                timeframe={this.props.timeframe}
+                                tsym={this.props.tsym}/>;
           }):
           <p className="list-row">No items found.</p>
           }

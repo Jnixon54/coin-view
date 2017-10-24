@@ -81,6 +81,7 @@
 
 .colChart {
   flex: 0 0 250px;
+  padding-right: 15px;
 }
 /* 
 .Grid--fit > .Grid-cell {

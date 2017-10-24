@@ -7,20 +7,26 @@ export default class Chart extends Component {
   constructor(props){
     super(props)
     this.state = {
-
+      focusData: []
     }
   }
 
+  componentWillReceiveProps(newProps){
+    // console.log(nextProps.focusData);
+    this.setState({focusData: newProps.focusData})
+
+  }
+
   render(){
+    // console.log(this.state.focusData)
     let tags = ["test"];
     !this.props.isFocused && tags.push("hidden");
-    
+    console.log(this.state.focusData);
     return(
       <div>
         <div className={this.props.tags.join(' ')}>
-            <button className="return" onClick={() => this.props.handleFocus([])}>{"<<"}</button>
           <div className="big-chart">
-          <Sparklines data={this.props.focusData.map(item => item.close)} height={125} margin={0}>
+          <Sparklines data={this.state.focusData.map(item => item.close)} height={125} margin={0}>
             <SparklinesLine color="#60887b" />
           </Sparklines>
           </div>

@@ -24,7 +24,8 @@ class App extends Component {
       topCoinsHist: [],
       isFocused: false,
       focusData: [],
-      timeframe: 'day'
+      timeframe: 'day',
+      tsym: 'USD'
 
 
     }
@@ -41,7 +42,7 @@ class App extends Component {
   componentDidMount(){
     this.retrieveGlobalData();
     // this.retrieveCoinList();
-    this.retrieveTopCoins(4);
+    this.retrieveTopCoins(20);
     // this.retrieveMultiFull();
     
   }
@@ -70,21 +71,34 @@ class App extends Component {
     } else {
       this.setState({isFocused: true, focusData: coinHist});
     }
-    console.log(coinHist);
+    
     // console.log(this.state.isFocused.toString() + this.state.focus.toString());
   }
   handleTimeframe(timeframe){
     this.setState({timeframe});
   }
 
+  handleToSymbol(tsym){
+    this.setState({tsym: tsym});
+  }
+
   render() {
     let tags = ["test"];
     !this.state.isFocused && tags.push("hidden");
+    let buttonTags = ["return", "hidden-button"];
+    this.state.isFocused && buttonTags.pop();
+    console.log(buttonTags.join(' '));
+    console.log(this.state.isFocused);
 
     return (
       <div className="App">
         <GlobalDataDisplay data={this.state.globalData} />
         <div className="button-nav">
+          <button className={buttonTags.join(' ')} onClick={() => this.handleFocus([])}>{"<<"}</button>
+          {/* <input placeholder="Enter symbol"></input> */}
+          <button className="button" onClick={() => this.handleToSymbol('BTC')}>BTC</button>
+          <button className="button" onClick={() => this.handleToSymbol('USD')}>USD</button>
+          <span></span>
           <button className="button" onClick={() => this.handleTimeframe('day')}>24 HR</button>
           <button className="button" onClick={() => this.handleTimeframe('week')}>7 Day</button>
           <button className="button" onClick={() => this.handleTimeframe('month')}>1 Month</button>
@@ -92,7 +106,8 @@ class App extends Component {
         <ListCreator topCoins={this.state.topCoins}
                      isFocused={this.state.isFocused}
                      handleFocus={this.handleFocus}
-                     timeframe={this.state.timeframe}/>
+                     timeframe={this.state.timeframe}
+                     tsym={this.state.tsym}/>
         <Chart handleFocus={this.handleFocus}
                isFocused={this.state.isFocused}
                focusData={this.state.focusData}
